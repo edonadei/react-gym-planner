@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import {Paper, Tabs} from '@material-ui/core'
 import Tab from '@material-ui/core/Tab'
 
-export default class Footer extends Component {
-  render() {
-    return (
-      <Paper>
+export default function Footer({muscles}) {
+  return (
+    <Paper>
         <Tabs
           value={0}
           indicatorColor="primary"
@@ -17,6 +16,6 @@ export default class Footer extends Component {
           <Tab label="Item Three" />
         </Tabs>
       </Paper>
-    );
-  }
+  )
 }
+

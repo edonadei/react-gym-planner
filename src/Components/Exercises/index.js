@@ -8,14 +8,20 @@ const styles = {
   capitalize: { textTransform: 'capitalize'}
 };
 
-export default function index({exercises}) {
+export default function index({exercise, exercises, category, onSelect}) {
   return (
     <Grid container>
       <Grid item sm>
-        <LeftPane styles={styles} exercises={exercises} />
+        <LeftPane 
+          styles={styles} 
+          exercises={exercises}
+          category={category}
+          onSelect={onSelect} />
       </Grid>
       <Grid item sm>
-        <RightPane styles={styles} />
+        <RightPane 
+          styles={styles}
+          exercise={exercise} />
       </Grid>
     </Grid>
   );

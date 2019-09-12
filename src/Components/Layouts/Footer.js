@@ -5,8 +5,8 @@ import Tab from '@material-ui/core/Tab'
 export default ({ muscles, category, onSelect }) => {
 
   const index = category
-    ? muscles.findIndex(group => group === category) + 1
-    : 0
+    ? muscles.findIndex(group => group === category) + 1 // Does it exist in my list of muscle ?
+    : 0 // Else we stay on ALL
 
   const onIndexSelect = (e, index) => {
     onSelect(index === 0 ? '' : muscles[index - 1])

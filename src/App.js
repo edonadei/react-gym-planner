@@ -8,6 +8,15 @@ export default class App extends Component {
     exercises
   }
 
+  handleCategorySelected(category) {
+
+    this.setState({
+      category
+    })
+    
+  }
+
+  // We're formatting the data as we need it
   getExercisesByMuscles() {
     return Object.entries ( // We use this method to iterate easily throught categories then exercices
       this.state.exercises.reduce((exercises, exercise) => {
@@ -23,13 +32,17 @@ export default class App extends Component {
   }
 
   render() {
-    const exercises = this.getExercisesByMuscles();
+    const exercises = this.getExercisesByMuscles(),
+    {category} = this.state;
+
     return (
       <React.Fragment>
         <Header />
         <Exercises exercises={exercises} />
         <Footer
-          muscles={muscles} />
+          category={category}
+          muscles={muscles}
+          onSelect={this.handleCategorySelected} />
       </React.Fragment>
     )
   }

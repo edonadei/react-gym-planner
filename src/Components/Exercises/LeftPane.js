@@ -24,7 +24,7 @@ export default ({ styles, exercises, category, onSelect }) => {
                 </React.Fragment>
               : null // Else we do not display it
         )}
-      </Paper>;
+      </Paper>
     </React.Fragment>
   );
 };

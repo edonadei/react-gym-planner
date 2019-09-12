@@ -24,5 +24,5 @@ export default function index({exercise, exercises, category, onSelect}) {
           exercise={exercise} />
       </Grid>
     </Grid>
-  );
+  )
 }

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Dialog, Button, Fab } from "@material-ui/core";
+import { Dialog, Button, Fab, TextField, Select, MenuItem, InputLabel, FormControl } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/styles';
 import {
   DialogActions,
   DialogContent,
@@ -8,9 +10,22 @@ import {
   DialogTitle
 } from "@material-ui/core";
 
-export default class extends Component {
+const styles = theme => ({
+  textField: {
+    marginLeft: 20,
+    marginRight: 20,
+    width: 200,
+  },
+});
+
+class HigherOrderComponent extends Component {
   state = {
-    open: false
+    open: false,
+    exercise: {
+      title: '',
+      description: '',
+      muscles: ''
+    }
   };
 
   handleToggle = () => {
@@ -19,8 +34,32 @@ export default class extends Component {
     });
   };
 
+  handleChange = name => ({ target: { value } }) => {
+    this.setState({
+      exercise: {
+        ...this.state.exercise,
+        [name]: value
+      }
+    }
+    )
+  }
+
+  handleSubmit = () => {
+    const { exercise } = this.state;
+    this.props.onCreate(exercise);
+    this.setState({
+      exercise: {
+        title: '',
+        description: '',
+        muscles: ''
+      },
+    })
+    this.handleToggle();
+  }
+
   render() {
-    const { open } = this.state;
+    const { open, exercise: { title, description, muscles } } = this.state;
+    const { classes, muscles: categories } = this.props;
     return (
       <React.Fragment>
         <Fab color="primary" onClick={this.handleToggle} size="medium">
@@ -39,12 +78,66 @@ export default class extends Component {
               Please fill out the form below.
             </DialogContentText>
           </DialogContent>
-          <form />
+          <form>
+            <TextField
+              className={classes.textField}
+              id="standard-name"
+              label="Title"
+              value={title}
+              onChange={this.handleChange('title')}
+              margin="normal"
+            />
+            <br />
+            <TextField
+              className={classes.textField}
+              id="standard-name"
+              label="Description"
+              multiline
+              rows="4"
+              value={description}
+              onChange={this.handleChange('description')}
+              margin="normal"
+            />
+            <br />
+            <br />
+            <FormControl>
+              <InputLabel
+                className={classes.textField}
+                htmlFor="muscles-simple">
+                Muscles
+                </InputLabel>
+              <Select
+                className={classes.textField}
+                value={muscles}
+                onChange={this.handleChange('muscles')}
+                inputProps={{
+                  name: 'Muscles',
+                  id: 'muscles-simple',
+                }}
+              >
+                {categories.map(category =>
+                  <MenuItem key={category} value={category}>
+                    {category}
+                  </MenuItem>
+                )}
+              </Select>
+            </FormControl>
+          </form>
           <DialogActions>
-            <Button color="primary">Create</Button>
+            <Button
+              color="primary"
+              onClick={this.handleSubmit}>
+              Create
+            </Button>
           </DialogActions>
         </Dialog>
       </React.Fragment>
     );
   }
 }
+
+HigherOrderComponent.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(HigherOrderComponent);

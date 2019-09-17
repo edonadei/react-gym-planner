@@ -12,19 +12,28 @@ export default class App extends Component {
   handleCategorySelected = (category) => {
     this.setState({
       category
-    }) 
+    })
   }
 
   // We are going to use setState with PrevValue, propsToAdd
-  handleExerciseselected = (id) => {
+  handleExerciseSelected = (id) => {
     this.setState(({ exercises }) => ({
       exercise: exercises.find(ex => ex.id === id) // If the ID match with the ID we're searching
     }))
   }
 
+  handleExerciseCreate = (exercise) => {
+    this.setState(({ exercises }) => ({ // Exercises = old array
+      exercises: [
+      ...exercises,
+        exercise // We increment to the old array, the new element
+      ]
+      }))
+  }
+
   // We're formatting the data as we need it
   getExercisesByMuscles() {
-    return Object.entries ( // We use this method to iterate easily throught categories then exercises
+    return Object.entries( // We use this method to iterate easily throught categories then exercises
       this.state.exercises.reduce((exercises, exercise) => {
         // exercises = accumulator / exercise = object we are looking over
         const { muscles } = exercise; // We are looking at the properties muscle (as described in store)
@@ -39,16 +48,18 @@ export default class App extends Component {
 
   render() {
     const exercises = this.getExercisesByMuscles(),
-    {category, exercise} = this.state;
+      { category, exercise } = this.state;
 
     return (
       <React.Fragment>
-        <Header />
-        <Exercises 
+        <Header
+          muscles={muscles}
+          onExerciseCreate={this.handleExerciseCreate} />
+        <Exercises
           exercise={exercise}
           exercises={exercises}
           category={category}
-          onSelect={this.handleExerciseselected} />
+          onSelect={this.handleExerciseSelected} />
         <Footer
           category={category}
           muscles={muscles}

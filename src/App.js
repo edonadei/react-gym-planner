@@ -22,6 +22,12 @@ export default class App extends Component {
     }))
   }
 
+  handleExerciseDeleted = (id) => {
+    this.setState(({exercises}) => ({
+      exercises: exercises.filter(ex => ex.id !== id)
+    }))
+  }
+
   handleExerciseCreate = (exercise) => {
     this.setState(({ exercises }) => ({ // Exercises = old array
       exercises: [
@@ -33,16 +39,20 @@ export default class App extends Component {
 
   // We're formatting the data as we need it
   getExercisesByMuscles() {
+
+    const initExercises = muscles.reduce((exercises, category) => ({
+      ...exercises,
+      [category]: []
+    }), {})
+
     return Object.entries( // We use this method to iterate easily throught categories then exercises
       this.state.exercises.reduce((exercises, exercise) => {
         // exercises = accumulator / exercise = object we are looking over
         const { muscles } = exercise; // We are looking at the properties muscle (as described in store)
-        exercises[muscles] = exercises[muscles] // Does the muscle scanned equals the one being looked over ? 
-          ? [...exercises[muscles], exercise] // If we do, we iterate the object itself
-          : [exercise] // else we just return an array with the exercise alone 
+        exercises[muscles] = [...exercises[muscles], exercise] // else we just return an array with the exercise alone 
 
         return exercises;
-      }, {})
+      }, initExercises)
     )
   }
 
@@ -59,7 +69,8 @@ export default class App extends Component {
           exercise={exercise}
           exercises={exercises}
           category={category}
-          onSelect={this.handleExerciseSelected} />
+          onSelect={this.handleExerciseSelected}
+          onDelete={this.handleExerciseDeleted} />
         <Footer
           category={category}
           muscles={muscles}

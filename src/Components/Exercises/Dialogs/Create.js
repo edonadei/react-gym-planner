@@ -46,7 +46,10 @@ class HigherOrderComponent extends Component {
 
   handleSubmit = () => {
     const { exercise } = this.state;
-    this.props.onCreate(exercise);
+    this.props.onCreate({
+      ...exercise,
+      id: exercise.title.toLocaleLowerCase().replace(/ /g, '-')
+    });
     this.setState({
       exercise: {
         title: '',

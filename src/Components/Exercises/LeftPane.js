@@ -1,9 +1,9 @@
 import React from "react";
 import Paper from "@material-ui/core/Paper";
 import { Typography, List, ListItem, ListItemText, ListItemSecondaryAction, IconButton } from "@material-ui/core";
-import { Delete } from "@material-ui/icons"
+import { Delete, Edit } from "@material-ui/icons"
 
-export default ({ styles, exercises, category, onSelect, onDelete }) => {
+export default ({ styles, exercises, category, onSelect, onDelete, onSelectEdit }) => {
   return (
     <React.Fragment>
       <Paper style={styles.Paper}>
@@ -20,6 +20,9 @@ export default ({ styles, exercises, category, onSelect, onDelete }) => {
                     <ListItem key={id} button onClick={() => onSelect(id)}>
                       <ListItemText primary={title} />
                       <ListItemSecondaryAction>
+                      <IconButton onClick={() => onSelectEdit(id)}>
+                          <Edit />
+                        </IconButton>
                         <IconButton onClick={() => onDelete(id)}>
                           <Delete />
                         </IconButton>

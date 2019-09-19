@@ -1,5 +1,6 @@
 import React from "react";
 import { Paper, Typography } from "@material-ui/core";
+import Form from "./Form"
 
 // We destructure the exercice object
 export default ({
@@ -8,10 +9,18 @@ export default ({
     id,
     title = "Welcome !",
     description = "Please select an exercice from the list on the left."
-  }
+  },
+  editMode,
+  muscles,
+  onEdit
 }) => {
   return (
     <Paper style={styles.Paper}>
+      {editMode 
+      ? <Form 
+        muscles={muscles}
+        onSubmit={onEdit} />
+      : <React.Fragment />}
       <Typography variant="h5" color="textSecondary">
         {title}
       </Typography>

@@ -54,6 +54,12 @@ export default class App extends Component {
     }));
   };
 
+  finishEdit = () => {
+    this.setState(() => ({
+      editMode: false
+    }))
+  }
+
   // We're formatting the data as we need it
   getExercisesByMuscles() {
     const initExercises = muscles.reduce(
@@ -96,6 +102,7 @@ export default class App extends Component {
           onDelete={this.handleExerciseDeleted}
           onSelectEdit={this.handleSelectEdit}
           onEdit={this.handleExerciceEdit}
+          endEdit={this.finishEdit}
         />
         <Footer
           category={category}

@@ -12,14 +12,16 @@ export default ({
   },
   editMode,
   muscles,
-  onEdit
+  onEdit,
+  endEdit
 }) => {
   return (
     <Paper style={styles.Paper}>
       {editMode 
       ? <Form 
         muscles={muscles}
-        onSubmit={onEdit} />
+        onSubmit={onEdit}
+        finishWithForm={endEdit} />
       : <React.Fragment />}
       <Typography variant="h5" color="textSecondary">
         {title}

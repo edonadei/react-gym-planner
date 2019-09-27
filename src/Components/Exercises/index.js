@@ -8,7 +8,7 @@ const styles = {
   capitalize: { textTransform: 'capitalize'}
 };
 
-export default function index({exercise, exercises, category, editMode, muscles, onSelect, onDelete, onSelectEdit, onEdit}) {
+export default function index({exercise, exercises, category, editMode, muscles, onSelect, onDelete, onSelectEdit, onEdit, endEdit}) {
   return (
     <Grid container>
       <Grid item sm>
@@ -26,7 +26,8 @@ export default function index({exercise, exercises, category, editMode, muscles,
           exercise={exercise}
           editMode={editMode}
           muscles={muscles}
-          onEdit={onEdit} />
+          onEdit={onEdit}
+          endEdit={endEdit} />
       </Grid>
     </Grid>
   )

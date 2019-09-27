@@ -32,7 +32,9 @@ export default withStyles(styles)(
     };
 
     handleSubmit = () => {
-      const { exercise } = this.state;
+      const exercise = this.state;
+      console.log(exercise);
+      console.log(this.state);
       this.props.onSubmit({
         ...exercise,
         id: exercise.title.toLocaleLowerCase().replace(/ /g, "-")
@@ -44,7 +46,7 @@ export default withStyles(styles)(
           muscles: ""
         }
       });
-      this.handleToggle();
+      this.props.finishWithForm();
     };
 
     render() {

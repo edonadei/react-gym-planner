@@ -48,7 +48,7 @@ export default class HigherOrderComponent extends Component {
               Please fill out the form below.
             </DialogContentText>
           </DialogContent>
-          <Form muscles={muscles} onSubmit={onCreate} ></Form>
+          <Form muscles={muscles} onSubmit={onCreate} finishWithForm={this.handleToggle} ></Form>
         </Dialog>
       </React.Fragment>
     );

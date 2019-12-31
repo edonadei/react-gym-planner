@@ -1,6 +1,10 @@
 # Muscles exercice planner
 
+Application to manage an array of exercices, and to edit it, using hooks & material-UI with React
+
 ## **[LIVE DEMO](https://edonadei-workout-exercices.netlify.com/)**
+
+![screenshot](muscles_exercices_app.png)
 
 ## Available Scripts
 
